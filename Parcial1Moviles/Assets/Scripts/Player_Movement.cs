@@ -19,6 +19,9 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
+        // Actualizar si está en el suelo
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.2f, groundLayer);
+
         // Aplicar movimiento solo mientras se mantiene el botón presionado
         Vector3 velocity = rb.velocity;
         velocity.x = moveInput * moveSpeed;
@@ -37,14 +40,9 @@ public class Player_Movement : MonoBehaviour
 
     public void Jump()
     {
-        if (CheckGrounded())
+        if (isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0);
         }
-    }
-
-    private bool CheckGrounded()
-    {
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
     }
 }
