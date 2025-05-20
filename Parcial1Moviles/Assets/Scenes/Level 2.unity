@@ -1887,11 +1887,12 @@ PrefabInstance:
       value: StopMoving
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6164591710812567732, guid: 57e24eb2310f911448323b5e227d83e3, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 788019867905574074, guid: 57e24eb2310f911448323b5e227d83e3,
         type: 3}
-      insertIndex: 3
+      insertIndex: 2
       addedObject: {fileID: 1147719255}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57e24eb2310f911448323b5e227d83e3, type: 3}
