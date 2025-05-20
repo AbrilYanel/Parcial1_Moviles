@@ -13,9 +13,11 @@ public class PlayerTP : MonoBehaviour
     
     private bool isInsideTeleporter = false;
     private Rigidbody rb;
+    public Teletransportador radiotp;
 
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         if (playerBody == null) playerBody = transform;
     }
@@ -26,6 +28,12 @@ public class PlayerTP : MonoBehaviour
         if (Input.GetKeyDown(teleportKey))
         {
             ToggleTeleport();
+        }
+
+        if (isInsideTeleporter && currentTeleporter != null)
+        {
+            // Actualizar la posición del jugador cada frame para que siga al teletransportador
+            transform.position = currentTeleporter.position;
         }
     }
 
@@ -63,12 +71,13 @@ public class PlayerTP : MonoBehaviour
     {
         
         isInsideTeleporter = true;
-
+        
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
-       
+
 
         transform.position = currentTeleporter.position;
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
     }
 
     void ExitTeleporter()
@@ -76,8 +85,9 @@ public class PlayerTP : MonoBehaviour
         isInsideTeleporter = false;
         rb.useGravity = true;
         rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
-        
+
     }
 
     public void TryJumpToExit(float jumpForce = 7f)
